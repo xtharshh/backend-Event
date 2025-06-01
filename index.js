@@ -5,14 +5,29 @@ const app = express();
 const uuid = require('uuid')
 require("nodemailer");
 const cors = require("cors");
-app.use(cors());
-var multer = require('multer');
+const multer = require('multer');
+const cookieParser = require("cookie-parser");
 
+// CORS configuration
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://your-frontend-domain.vercel.app'],
+  origin: [
+    'http://localhost:3000',
+    'https://backend-event-n51mvr95c-harsh-kumars-projects-52627a31.vercel.app',
+    'http://localhost:5000'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
-const cookieParser = require("cookie-parser");
+
+// Root route handler
+app.get('/', (req, res) => {
+  res.status(200).json({ 
+    status: 'success',
+    message: 'Welcome to Event Management System API',
+    version: '1.0.0'
+  });
+});
+
 dotenv.config({path:'./config.env'});
 
 require('./db/conn');
