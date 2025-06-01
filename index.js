@@ -31,10 +31,13 @@ app.use(require("./router/menu"));
 
 app.use(require("./router/task"));
 
-
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://your-frontend-domain.vercel.app'],
+  credentials: true
+}));
 
 //connection
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`server started at ${PORT} port`);
   });
