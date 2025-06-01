@@ -8,6 +8,10 @@ const cors = require("cors");
 app.use(cors());
 var multer = require('multer');
 
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://your-frontend-domain.vercel.app'],
+  credentials: true
+}));
 const cookieParser = require("cookie-parser");
 dotenv.config({path:'./config.env'});
 
@@ -31,10 +35,6 @@ app.use(require("./router/menu"));
 
 app.use(require("./router/task"));
 
-app.use(cors({
-  origin: ['http://localhost:3000', 'https://your-frontend-domain.vercel.app'],
-  credentials: true
-}));
 
 //connection
 const PORT = process.env.PORT || 5000;
